@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package linkedlists;
+package ex1;
 
 /**
  * A basic doubly linked list implementation.
@@ -223,6 +223,40 @@ public class DoublyLinkedList<E> {
     sb.append(")");
     return sb.toString();
   }
+
+  // concatenate method for exercise 1
+  public void concatenate(DoublyLinkedList<E> list) {
+    // if list is empty, do nothing and return to the beginning
+    if (list.isEmpty()) {
+      return;
+    }
+
+    // Find end of L
+    Node<E> L_Last = trailer.getPrev();
+
+    // Find beginning of M
+    Node<E> M_First = list.header.getNext();
+
+    // Find end of M
+    Node<E> M_Last = list.trailer.getPrev();
+
+    // connect end of L to into the beginning of M
+    L_Last.setNext(M_First);
+
+    // connect beginning of M to end of L
+    M_First.setPrev(L_Last);
+
+    // connect end of M to L's trailer
+    M_Last.setNext(trailer);
+
+    // connect end trailer to end of M
+    trailer.setPrev(M_Last);
+
+    // update the list size after concatenation
+    size += list.size;
+  }
+
+
 //main method
   public static void main(String[] args)
   {
@@ -237,6 +271,28 @@ public class DoublyLinkedList<E> {
 	  
 	  System.out.println(list);
 	  System.out.println(list.first());
+      System.out.println();
 	  //
+
+      // Exercise 1
+      // Create L and M
+      DoublyLinkedList<String> L = new DoublyLinkedList<>();
+      DoublyLinkedList<String> M = new DoublyLinkedList<>();
+
+      L.addFirst("A");
+      L.addLast("B");
+
+      M.addFirst("C");
+      M.addLast("D");
+
+      System.out.println("Exercise 1: ");
+      System.out.println("L: " + L);
+      System.out.println("M: " + M);
+
+      // connect L and M
+      L.concatenate(M);
+      System.out.println();
+      System.out.println("After Concatenation: ");
+      System.out.println("L': " + L);
   }
 } //----------- end of DoublyLinkedList class -----------
