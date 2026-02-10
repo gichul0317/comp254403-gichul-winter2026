@@ -30,7 +30,7 @@ package ex3;
  * @author Roberto Tamassia
  * @author Michael H. Goldwasser
  */
-public class CircularlyLinkedList<E> {
+public class CircularlyLinkedList<E> implements Cloneable {
   //---------------- nested Node class ----------------
   /**
    * Singly linked node, which stores a reference to its element and
@@ -180,10 +180,42 @@ public class CircularlyLinkedList<E> {
     sb.append(")");
     return sb.toString();
   }
+
+  // clone method for exercise 3
+  public CircularlyLinkedList<E> clone() throws CloneNotSupportedException {
+    // make copy of the object
+    CircularlyLinkedList<E> other = (CircularlyLinkedList<E>)  super.clone();
+
+    if (size > 0) {
+      // get current head
+      Node<E> headNode = tail.getNext();
+
+      // first node
+      Node<E> newHead = new Node<>(headNode.getElement(), null);
+
+      // get next node of current head
+      Node<E> walk = headNode.getNext();
+
+      // connect back to the first node
+      Node<E> otherTail = newHead;
+
+      // while current head's next node is not current head
+      while (walk != headNode) {
+        Node<E> newest = new Node<>(walk.getElement(), null);
+        otherTail.setNext(newest);
+        otherTail = newest;
+        walk = walk.getNext();
+      }
+      // connect back to the first node (circular)
+      otherTail.setNext(newHead);
+      other.tail = otherTail;
+      other.size = size;
+    }
+    return other;
+  }
   
 //main method
-  public static void main(String[] args)
-  {
+  public static void main(String[] args) throws CloneNotSupportedException {
 	  
 	  //(LAX, MSP, ATL, BOS)
 	  CircularlyLinkedList<String> circularList = new CircularlyLinkedList<String>();
@@ -199,5 +231,21 @@ public class CircularlyLinkedList<E> {
 	  System.out.println(circularList);
 
 	  //
+
+      // Exercise 3
+      System.out.println();
+      CircularlyLinkedList<String> originalList = new CircularlyLinkedList<>();
+      originalList.addFirst("LAX");
+      originalList.addLast("MSP");
+      originalList.addLast("ATL");
+      originalList.addLast("BOS");
+      CircularlyLinkedList<String> cloneList = originalList.clone();
+
+      System.out.println("Original: " + originalList);
+      originalList.rotate();
+      System.out.println("Original after rotate: " + originalList);
+      originalList.removeFirst();
+      System.out.println("Original after remove first: " + originalList);
+      System.out.println("Cloned: " + cloneList);
   }
 }
