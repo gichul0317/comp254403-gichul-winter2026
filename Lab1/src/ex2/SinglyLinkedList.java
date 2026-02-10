@@ -250,6 +250,31 @@ public class SinglyLinkedList<E> implements Cloneable {
       // current becomes next one
       current = current.getNext();
     }
+
+    // change head
+    if (node1 == head) {
+      head = node2;
+    } else {
+      prev1.setNext(node2);
+    }
+    if (node2 == head) {
+      head = node1;
+    } else {
+      prev2.setNext(node1);
+    }
+
+    // swap nodes
+    Node<E> temp = node1.getNext();
+    node1.setNext(node2.getNext());
+    node2.setNext(temp);
+
+    // change tail
+    if (node1 == tail) {
+      tail = node2;
+    }
+    if (node2 == tail) {
+      tail = node1;
+    }
   }
 
   //main method
@@ -271,12 +296,12 @@ public class SinglyLinkedList<E> implements Cloneable {
       Node<String> node1 = list.head.getNext();
       Node<String> node2 = list.tail;
 
-      System.out.println(node1.getElement()); // MSP (second node of current)
-      System.out.println(node2.getElement()); // DFW (last node of current)
+      System.out.println("second node: " + node1.getElement()); // MSP (second node of current)
+      System.out.println("last node: " + node2.getElement()); // DFW (last node of current)
 
       // swapNodes method
       list.swapNodes(node1, node2);
-      System.out.println("After swapNode: " + list);
+      System.out.println("After swap second and last node: " + list);
   }
   
 }
