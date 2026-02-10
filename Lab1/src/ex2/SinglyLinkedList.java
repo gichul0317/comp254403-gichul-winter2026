@@ -221,14 +221,35 @@ public class SinglyLinkedList<E> implements Cloneable {
     return sb.toString();
   }
 
+  // swapNodes method for exercise 2
   public void swapNodes(Node<E> node1, Node<E> node2) {
     // if node 1 and node 2 are the same node, do nothing and return to the beginning.
     if (node1 == node2) {
       return;
     }
 
-    // find previous nodes
+    // define previous nodes
+    Node<E> prev1 = null;
+    Node<E> prev2 = null;
 
+    // define current point
+    Node<E> current = head;
+
+    // find previous nodes while current point is not null
+    while (current != null) {
+      //if current's next node is node1
+      if (current.getNext() == node1) {
+        prev1 = current;
+      }
+
+      // if current's next node is node 2
+      if (current.getNext() == node2) {
+        prev2 = current;
+      }
+
+      // current becomes next one
+      current = current.getNext();
+    }
   }
 
   //main method
@@ -242,8 +263,20 @@ public class SinglyLinkedList<E> implements Cloneable {
 	  //
 	  list.addFirst("LAX");
       list.addLast("DFW");
-	  System.out.println(list);
+	  System.out.println(list); // LAX -> MSP -> ATL -> BOS -> DFW
 	  //
+
+      // Exercise 2
+      System.out.println();
+      Node<String> node1 = list.head.getNext();
+      Node<String> node2 = list.tail;
+
+      System.out.println(node1.getElement()); // MSP (second node of current)
+      System.out.println(node2.getElement()); // DFW (last node of current)
+
+      // swapNodes method
+      list.swapNodes(node1, node2);
+      System.out.println("After swapNode: " + list);
   }
   
 }
