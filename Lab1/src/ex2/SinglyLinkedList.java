@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package linkedlists;
+package ex2;
 
 /**
  * A basic singly linked list implementation.
@@ -220,6 +220,16 @@ public class SinglyLinkedList<E> implements Cloneable {
     sb.append(")");
     return sb.toString();
   }
+
+  public void swapNodes(Node<E> node1, Node<E> node2) {
+    // if node 1 and node 2 are the same node, do nothing and return to the beginning.
+    if (node1 == node2) {
+      return;
+    }
+
+
+  }
+
   //main method
   public static void main(String[] args)
   {
