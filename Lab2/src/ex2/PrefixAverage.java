@@ -60,13 +60,39 @@ class PrefixAverage {
   public static void main(String[] args) {
     int n = 500;      // starting value
     int trials = 10;  // number of tests
+    int start = n;
 
     // test prefixAverage2 (O(n) first)
     System.out.println("Testing prefixAverage2...");
+    for (int t=0; t<trials; t++) {
+      double[] testArr = new double[n]; // create input array of size n
+      for (int i=0; i<n; i++) {
+        testArr[i] = i;    // create elements in the testArr with value of 0.0, 1,0, 2.0, ...
+      }
+
+      long startTime = System.currentTimeMillis(); // measure start time
+      double[] temp = prefixAverage2(testArr); // run using generated array of prefixaverage2
+      long endTime = System.currentTimeMillis(); // measure end time
+      long elapsed = endTime - startTime; // measure elapsed time
+      System.out.println(String.format("n: %9d took %12d milliseconds", n, elapsed)); // print result
+      n *= 2;
+    }
 
     // test prefixAverage1 (O(n^2))
     System.out.println("\nTesting prefixAverage1...");
+    n = start;
+    for (int t=0; t<trials; t++) {
+      double[] testArr = new double[n]; // create input array of size n
+      for (int i=0; i<n; i++) {
+        testArr[i] = i;    // create elements in the testArr with value of 0.0, 1,0, 2.0, ...
+      }
 
+      long startTime = System.currentTimeMillis(); // measure start time
+      double[] temp = prefixAverage1(testArr); // run using generated array of prefixaverage1
+      long endTime = System.currentTimeMillis(); // measure end time
+      long elapsed = endTime - startTime; // measure elapsed time
+      System.out.println(String.format("n: %9d took %12d milliseconds", n, elapsed)); // print result
+      n *= 2;
+    }
   }
-
 }
