@@ -56,4 +56,17 @@ class PrefixAverage {
     return a;
   }
 
+  // main method for perform experimental analysis
+  public static void main(String[] args) {
+    int n = 500;      // starting value
+    int trials = 10;  // number of tests
+
+    // test prefixAverage2 (O(n) first)
+    System.out.println("Testing prefixAverage2...");
+
+    // test prefixAverage1 (O(n^2))
+    System.out.println("\nTesting prefixAverage1...");
+
+  }
+
 }
