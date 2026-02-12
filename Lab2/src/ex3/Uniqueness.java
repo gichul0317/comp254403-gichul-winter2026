@@ -62,11 +62,69 @@ class Uniqueness {
     // test unique2 (O(n log n)
     System.out.println("Determine the largest value of n for unique 2...");
 
+    // repeat until passing time limit or memory limit
     while (true) {
-      // do sth
+      try {
+        int[] testArr = new int[n]; // create array of size 1000
+
+        for (int i=0; i<n; i++) {
+          testArr[i] = i; // assign values in testArr
+        }
+
+        long start = System.currentTimeMillis(); // start time
+        unique2(testArr);                        // run unique2
+        long end = System.currentTimeMillis();   // end time
+        long elapsed = end - start;              // elapsed time
+
+        System.out.println(String.format("n: %d     time: %3dms", n, elapsed)); // print result
+
+        // if exceed 1 minute limit stop test
+        if (elapsed > oneMinute) {
+          System.out.println("Exceed 1 minute at n: " + n);
+          break;
+        }
+
+        n *= 2; // double start size
+
+      } catch (Error e){
+        System.out.println(e.toString()); // if memory error occured
+        break;
+      }
     }
 
     // test unique1 (O(n^2))
+    n = 1000; // reset start size
 
+    System.out.println("\nDetermine the largest value of n for unique 1...");
+
+    // repeat until passing time limit or memory limit
+    while (true) {
+      try {
+        int[] testArr = new int[n]; // create array of size 1000
+
+        for (int i=0; i<n; i++) {
+          testArr[i] = i; // assign values in testArr
+        }
+
+        long start = System.currentTimeMillis(); // start time
+        unique1(testArr);                        // run unique1
+        long end = System.currentTimeMillis(); // end time
+        long elapsed = end - start;            // elapsed time
+
+        System.out.println(String.format("n: %d     time: %3dms", n, elapsed)); // print result
+
+        // if exceed 1 minute limit stop test
+        if (elapsed > oneMinute) {
+          System.out.println("Exceed 1 minute at n: " + n);
+          break;
+        }
+
+        n *= 2; // double start size
+
+      } catch (Error e){
+        System.out.println(e.toString()); // if memory error occured
+        break;
+      }
+    }
   }
 }
