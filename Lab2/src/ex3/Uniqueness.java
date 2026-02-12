@@ -54,4 +54,19 @@ class Uniqueness {
     return true;                           // if we reach this, elements are unique
   }
 
+  // main method to perform testing
+  public static void main(String[] args) {
+    long oneMinute = 60000; // 1 minute time limit
+    int n = 1000; // start size
+
+    // test unique2 (O(n log n)
+    System.out.println("Determine the largest value of n for unique 2...");
+
+    while (true) {
+      // do sth
+    }
+
+    // test unique1 (O(n^2))
+
+  }
 }
