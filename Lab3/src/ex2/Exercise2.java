@@ -1,5 +1,7 @@
 package ex2;
 
+import java.util.Scanner;
+
 public class Exercise2 {
     // reverse the string to check whether its palindrome or not
     public static String palindromeTest(String str) {
@@ -14,9 +16,18 @@ public class Exercise2 {
 
     // main for testing
     public static void main(String[] args) {
-        String testStr = "hello";
-        String result = palindromeTest(testStr);
+        Scanner scan = new Scanner(System.in);      // initiate scanner
 
-        System.out.println(testStr + " After: "+ result);
+        System.out.println("Enter the input: ");
+        String testStr = scan.nextLine().trim();           // test string
+        String result = palindromeTest(testStr);    // call palindromeTest
+
+        if (testStr.equals(result)) {
+            System.out.println(testStr + " reversed is: " + result + " ... It's palindrome!"); // if its palindrome
+        } else {
+            System.out.println(testStr + " is not palindrome..."); // not a palindrome
+        }
+
+        scan.close();                               // close scanner
     }
 }
