@@ -7,9 +7,18 @@ public class Exercise3 {
     public static void find(String path, String filename) {
         File file = new File(path); // create File object
 
-        System.out.println();
-        System.out.println(file.getName());
-        System.out.println(file.getAbsoluteFile());
+        if (file.isFile()) {        // if current path is a file
+            if (file.getName().equals(filename)) {      // if file name equals to given file name
+                System.out.println("\nFile path is... : " + file.getAbsolutePath()); // print path
+            }
+        }
+
+        else if (file.isDirectory()) {      // if current path is a directory
+            for (String f: file.list()) {   // loop through contents
+                File child = new File(file, f); // create child path
+                find(child.getAbsolutePath(), filename); // recursive search
+            }
+        }
     }
 
     // main for testing
